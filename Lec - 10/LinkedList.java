@@ -81,6 +81,51 @@ public class LinkedList{
       return temp;
     } 
   }
+  public int removeFirst() throws Exception {
+	  if(size==0) {
+		  throw new Exception("pgl linkedlist khali hai");
+	  }
+	  else {
+		  Node temp=head;
+		  head=head.next;
+		  temp.next=null;
+		  size--;
+		  return temp.data;
+		  
+	  }
+  }
+  public int removeLast() throws Exception {
+	  if(size==0) {
+		  throw new Exception("pgl linkedlist khali hai");
+	  }
+	  else if(size==1) {
+		  Node temp=head;
+		  head=null;
+		  size--;
+		  return temp.data;
+	  }
+	  else {
+		  Node temp = getNode(size-2);
+		  temp.next=null;
+		  Node n=tail;
+		  tail=temp;
+		  size--;
+		  return n.data;
+	  }
+  }
+  public int removeAtIndex(int k) throws Exception {
+	  if(k<=0 || k>=size) {
+		  throw new Exception("pgl index range ke bahar hai");
+	  }
+	  else {
+		  Node temp = getNode(k-1);
+		  Node n = temp.next;
+		  temp.next=n.next;
+		  n.next=null;
+		  size--;
+		  return n.data;
+	  }
+  }
   public void display() {
 	  Node temp=head;
 	  if(size!=0) {
