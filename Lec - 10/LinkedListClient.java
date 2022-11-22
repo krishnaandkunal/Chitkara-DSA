@@ -12,5 +12,11 @@ public class LinkedListClient{
 	    obj.addIndex(50,0);
 	    obj.addIndex(70,3);
 	    obj.display();
+	    System.out.println();
+	    obj.removeFirst();
+	    obj.removeLast();
+	    obj.removeAtIndex(2);
+	    //obj.removeAtIndex(4);
+	    obj.display();
 	    }
 	}
