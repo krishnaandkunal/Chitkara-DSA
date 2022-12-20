@@ -1,0 +1,38 @@
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+
+class Solution {
+    public TreeNode buildTree(int[] pre, int[] in) {
+       return build(pre,0,pre.length-1,in,0,in.length-1);
+    }
+    public TreeNode build(int[] pre, int a, int b, int[] in, int x, int y){
+        if(a>b || x>y)
+            return null;
+        TreeNode n = new TreeNode(pre[a]);
+        int z = search(in,x,y,pre[a]);
+        
+        n.left = build(pre,a+1,a+z-x,in,x,z-1);
+        n.right = build(pre,a+z-x+1,b,in,z+1,y);
+        return n;
+    }
+    public int search(int[] in, int x, int y, int z){
+        for(int i=x; i<=y; i++){
+            if(in[i]==z)
+                return i;
+        }
+        return -1;
+    }
+}
