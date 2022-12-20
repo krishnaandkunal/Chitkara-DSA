@@ -1,0 +1,67 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+class Solution {
+    public ListNode middleNode(ListNode head) {
+        ListNode slow=head;
+        ListNode fast=head;
+        
+        while(fast.next!=null && fast.next.next!=null){
+            slow=slow.next;
+            fast=fast.next.next;
+        }
+        return slow;
+    }
+    public ListNode reverseList(ListNode head) {
+        if(head==null || head.next==null)
+            return head;
+        
+        ListNode temp = reverseList(head.next);
+        head.next.next=head;
+        head.next=null;
+        return temp;
+    }
+    public void merge(ListNode list1, ListNode list2) {
+        if(list1==null)
+            return;
+        if(list2==null)
+            return;
+        ListNode head=null;
+        ListNode tail=null;
+        
+        head=list1;
+        tail=list1;
+        list1=list1.next;
+        int k=1;
+        while(list1!=null && list2!=null){
+            if(k%2==0){
+                tail.next=list1;
+                tail=list1;
+                list1=list1.next;
+            }
+            else{
+                tail.next=list2;
+                tail=list2;
+                list2=list2.next;
+            }
+            k++;
+        }
+        if(list1==null)
+            tail.next=list2;
+        if(list2==null)
+            tail.next=list1;
+    }
+    public void reorderList(ListNode head) {
+        ListNode mid = middleNode(head);
+        ListNode headB = reverseList(mid.next);
+        mid.next=null;
+        merge(head,headB);
+    }
+}
