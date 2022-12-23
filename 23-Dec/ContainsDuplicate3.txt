@@ -1,0 +1,23 @@
+class Solution {
+    public boolean containsNearbyAlmostDuplicate(int[] nums, int indexDiff, int valueDiff)  {
+        TreeSet<Integer> set = new TreeSet<>();
+        int s=0;
+        for(int i=0; i<nums.length; i++){
+            Integer x = set.ceiling(nums[i]);
+            if(x!=null && x-nums[i]<=valueDiff)
+                return true;
+            
+            Integer y = set.floor(nums[i]);
+            if(y!=null && nums[i]-y<=valueDiff)
+                return true;
+            
+            set.add(nums[i]);
+            
+            if(set.size()>indexDiff){
+                set.remove(nums[s]);
+                s++;
+            }
+        }
+        return false;
+    }
+}
